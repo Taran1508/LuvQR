@@ -1,101 +1,137 @@
-import Image from "next/image";
+'use client';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const loveMessage = formData.get('loveMessage');
+    console.log('Love Message:', loveMessage);
+    const data = {
+      message: formData.get('loveMessage'),
+    };
+    try {
+      const response = await fetch('http://localhost:3000/api/generate-qr', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      const res = await response.json();
+      console.log('Response', res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <>
+      <div>
+        <h1 className="text-6xl font-bold mt-4 mr-2 text-center bg-gradient-to-r from-pink-500 to-red-100 text-transparent bg-clip-text font-mono italic underline ">
+          LuvQR
+        </h1>
+
+        <h2 className="text-4xl font-bold mt-8 mr-2 text-center bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline">
+          Express Love Through QR Codes!💕
+        </h2>
+        <h4 className="text-xl font-bold mt-6  mr-2 text-center bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline">
+          A Simple Way to Send Hidden Love Messages...
+        </h4>
+        <p className="text-pink-200 text-sm mt-4 mr-2 text-center italic tracking-wide">
+          📜 Create a Love Story with QRs! 💖Scan. Express. Love.
+        </p>
+      </div>
+      <div>
+        <form
+          method="POST"
+          onSubmit={handleSubmit}
+          className="max-w-lg mx-auto mt-4 p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30"
+        >
+          <label className="block text-2xl font-bold text-center bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline mb-2">
+            💕Express Your Love Here!
+          </label>
+          <br />
+          <textarea
+            name="loveMessage"
+            placeholder="Start expressing your love here..."
+            rows="7" /* Increase rows for more height */
+            className="w-full h-40 p-4 text-lg text-pink-700 bg-white/90 border border-pink-300 rounded-2xl shadow-sm focus:ring-2 focus:ring-pink-400 outline-none transition-all duration-300 resize-none"
+          ></textarea>
+          <button
+            type="submit"
+            className="mt-4 w-full bg-gradient-to-r from-pink-500 to-red-400 text-white font-bold text-lg py-3 rounded-xl shadow-md hover:scale-105 transition-transform duration-200 hover:shadow-xl active:scale-100"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            Generate QR
+          </button>
+        </form>
+      </div>
+      <div>
+        <h3 className="text-4xl font-bold mt-16 mr-2 ml-12 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
+          What is LuvQR?
+        </h3>
+        <p className="text-pink-200 text-lg mt-2 mr-2 ml-12 italic tracking-wide">
+          LuvQR is a fun and romantic way for couples to exchange secret
+          messages using QR codes.
+          <br /> Write heartfelt notes, generate a QR, and let your partner scan
+          to reveal your love-filled words!
+        </p>
+      </div>
+      <div>
+        <h3 className="text-4xl font-bold mt-16 mr-2 ml-12 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
+          How it Works?
+        </h3>{' '}
+        <p className="text-pink-200 text-lg mt-2 mr-2 ml-12 italic tracking-wide">
+          ✨ Write a Message: Type a sweet, loving, or fun message..
+          <br /> 📲 Generate a QR Code: Let them scan and discover the magic.
+          Your words are encoded into a unique QR. <br />
+          💑 Relive Every Moment: Your love story, now stored forever in digital
+          form.
+        </p>
+      </div>
+      <div>
+        <h3 className="text-4xl font-bold mt-16 mr-2 ml-12 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
+          Why use LuvQR?
+        </h3>
+        <p className="text-pink-200 text-lg mt-2 mr-2 ml-12 italic tracking-wide">
+          ✅ Quick & Simple – No app downloads needed, just scan & read. <br />
+          💌 Personalized Love Notes – Send secret messages anywhere.
+          <br /> 🔒 Private & Secure – Only your special one can decode the
+          message.
+          <br /> 🎁 Perfect for Surprises – Attach QRs to gifts, letters, or
+          even random places!
+        </p>
+      </div>
+
+      <div>
+        <h3 className="text-4xl font-bold mt-16 ml-12 mr-2 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
+          Creative Ways to Use LuvQR!
+        </h3>
+        <p className="text-pink-200 text-lg mt-2 mr-2 ml-12 italic tracking-wide">
+          💖 Leave a Note on Their Coffee Cup ☕ – A sweet morning surprise!{' '}
+          <br />
+          🎁 Attach a QR to a Gift 🎁 – Make presents more meaningful.
+          <br />
+          💌 Place It in a Book 📖 – Hide a love note inside their favorite
+          read.
+          <br />
+          🏡 Stick It Around the House 🏠 – Tiny surprises in everyday places!
+          <br />
+        </p>
+      </div>
+      <div>
+        <h3 className="text-4xl font-bold mt-16 mr-2 ml-12 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
+          Start Sharing Love Today!
+        </h3>
+        <p className="text-pink-200 text-lg mt-2 mr-2 ml-12 italic tracking-wide">
+          💡 Create Your First QR Love Message Now! 📥 It’s Free & Instant!
+        </p>
+      </div>
+      <div>
+        <h3 className="text-4xl font-bold mt-16 mr-2 ml-12 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
+          Need Help or Have Suggestions?
+        </h3>
+        <p className="text-pink-200 text-lg mt-2 mr-2 ml-12 mb-10 italic tracking-wide">
+          📩 Contact us – We’d love to hear from you!
+        </p>
+      </div>
+    </>
   );
 }

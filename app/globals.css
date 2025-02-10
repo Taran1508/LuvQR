@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .custom-text-shadow {
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  }
+}
+
+@media (max-width: 768px) {
+  body {
+    background-size: auto; /* Adjust for smaller screens */
+  }
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -15,7 +27,22 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* // color: var(--foreground); */
+  background-image: url('/valen.jpg'); /* Replace with your image path */
+  background-size: cover; /* Ensure the image covers the entire screen */
+  background-repeat: no-repeat; /* Prevent tiling */
+  background-attachment: fixed; /* Keep the background fixed when scrolling */
+  background-position: center;
+  font-family: sans-serif;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.65); /* Add a dark overlay */
+  z-index: -1; /* Place it behind the content */
 }
