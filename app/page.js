@@ -65,7 +65,7 @@ export default function Home() {
             )}`}
             size={200}
             bgColor="#ffffff"
-            fgColor="#660017"
+            fgColor="#000000"
             level="H"
             imageSettings={{
               src: '/red-heart-paper-hand-craft-element_53876-128923.png',
