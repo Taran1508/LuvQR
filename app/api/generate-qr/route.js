@@ -18,9 +18,15 @@ export async function POST(request) {
 
   try {
     const savedMessage = await newMessage.save();
-    console.log('Saved Successfully:', savedMessage); // Debugging
+
+    console.log('Saved Successfully:', savedMessage._id); // Debugging
+
     return new Response(
-      JSON.stringify({ message: 'Message added', data: savedMessage }),
+      JSON.stringify({
+        message: 'Message added',
+        data: savedMessage._id,
+        switch: 'on',
+      }),
       {
         status: 201,
         headers: { 'Content-Type': 'application/json' },

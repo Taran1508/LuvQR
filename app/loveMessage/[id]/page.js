@@ -1,88 +1,32 @@
-'use client';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
-import { QRCodeCanvas } from 'qrcode.react';
-import { useRef } from 'react';
-import { createRoot } from 'react-dom/client';
+async function getMessage(id) {
+  if (!id) return null;
 
-export default function Home() {
-  const qrRef = useRef(null);
-  const divRef = useRef(null);
-  const btRef = useRef(null);
-  const qrRoot = useRef(null);
-
-  const downloadQR = () => {
-    const canvas = qrRef.current?.querySelector('canvas');
-    if (canvas) {
-      const pngUrl = canvas.toDataURL('image/png');
-      const downloadLink = document.createElement('a');
-      downloadLink.href = pngUrl;
-      downloadLink.download = 'luvqr.png';
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-      document.body.removeChild(downloadLink);
-      alert('LuvQR has Downloaded💕');
-    } else {
-      console.error('QR Code canvas not found!');
-    }
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const loveMessage = formData.get('loveMessage');
-    console.log('Love Message:', loveMessage);
-
-    const data = {
-      message: formData.get('loveMessage'),
-    };
-    try {
-      const response = await fetch(
-        'http://tdw-luv-qr.vercel.app/api/generate-qr',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(data),
-        }
-      );
-
-      const res = await response.json();
-      if (res.switch === 'on') {
-        setTimeout(() => {
-          if (qrRef.current) {
-            qrRef.current.style.display = 'flex';
-            divRef.current.style.display = 'flex';
-            btRef.current.style.display = 'flex';
-          }
-        }, 0);
-        if (!qrRoot.current) {
-          qrRoot.current = createRoot(qrRef.current);
-        }
-
-        qrRoot.current.render(
-          <QRCodeCanvas
-            value={`http://tdw-luv-qr.vercel.app/loveMessage/${encodeURIComponent(
-              res.data
-            )}`}
-            size={200}
-            bgColor="#ffffff"
-            fgColor="#660017"
-            level="H"
-            imageSettings={{
-              src: '/red-heart-paper-hand-craft-element_53876-128923.png',
-              height: 30,
-              width: 30,
-              opacity: 1,
-              excavate: true,
-            }}
-          />
-        );
+  try {
+    const res = await fetch(
+      `http://tdw-luv-qr.vercel.app/api/loveMessage/${id}`,
+      {
+        cache: 'no-store', // Ensures fresh data
       }
+    );
 
-      console.log('Response', res);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    if (!res.ok) return null;
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching message:', error);
+    return null;
+  }
+}
+
+export default async function LoveMessagePage({ params }) {
+  // `params.id` is available synchronously, no need to `await`
+  if (!params?.id) return notFound();
+
+  const data = await getMessage(params.id);
+
+  if (!data) return notFound();
 
   return (
     <>
@@ -102,42 +46,30 @@ export default function Home() {
         </p>
       </div>
       <div>
-        <form
-          method="POST"
-          onSubmit={handleSubmit}
-          className="max-w-lg mx-auto mt-4 p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30"
-        >
+        <form className="formD max-w-xl mx-auto h-[650px] max-h-[800px] mt-4 p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30">
           <label className="block text-2xl font-bold text-center bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline mb-2">
-            💕Express Your Love Here!
+            💕Your Love Message!
           </label>
           <br />
-          <textarea
+          <div
             name="loveMessage"
-            placeholder="Start expressing your love here..."
-            rows="7" /* Increase rows for more height */
-            className="w-full h-40 p-4 text-lg text-pink-700 bg-white/90 border border-pink-300 rounded-2xl shadow-sm focus:ring-2 focus:ring-pink-400 outline-none transition-all duration-300 resize-none"
-          ></textarea>
-          <button
-            type="submit"
-            className="mt-4 w-full bg-gradient-to-r from-pink-500 to-red-400 text-white font-bold text-lg py-3 rounded-xl shadow-md hover:scale-105 transition-transform duration-200 hover:shadow-xl active:scale-100"
+            className="loveMessage w-full min-h-[160px] max-h-[480px] p-4 text-lg text-pink-700 
+             bg-white/90 border border-pink-300 rounded-2xl shadow-sm 
+             focus:ring-2 focus:ring-pink-400 outline-none 
+             transition-all duration-300 resize-none overflow-auto"
           >
-            Generate QR
-          </button>
+            {data.message}
+          </div>
+
+          <Link
+            href="/"
+            className="link mt-4 w-[350px] bg-gradient-to-r from-pink-500 to-red-400 text-white font-bold text-lg py-3 rounded-xl shadow-md hover:scale-105 transition-transform duration-200 hover:shadow-xl active:scale-100"
+          >
+            Generate your Love Message
+          </Link>
         </form>
-        <div
-          ref={divRef}
-          className="qrCode  w-[250px] h-[300px]  mx-auto mt-4 p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30"
-        >
-          <div id="qrCode" ref={qrRef}></div>
-          <button
-            ref={btRef}
-            onClick={downloadQR}
-            className="btRef bg-gradient-to-r from-pink-500 to-red-400 text-white font-bold text-white px-4 py-2 rounded mt-4"
-          >
-            Download LuvQR
-          </button>
-        </div>
       </div>
+
       <div>
         <h3 className="text-4xl font-bold mt-16 mr-2 ml-12 bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline decoration-wavy">
           What is LuvQR?
