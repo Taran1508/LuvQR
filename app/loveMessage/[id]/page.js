@@ -46,17 +46,17 @@ export default async function LoveMessagePage({ params }) {
         </p>
       </div>
       <div>
-        <form className="formD max-w-xl mx-auto h-[650px] max-h-[800px] mt-4 p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30">
+        <form className="formD max-w-xl mx-auto min-h-[400px] max-h-[90vh] mt-4 p-6 bg-white/20 backdrop-blur-md rounded-2xl shadow-lg border border-white/30 flex flex-col">
           <label className="block text-2xl font-bold text-center bg-gradient-to-r from-pink-400 to-red-100 text-transparent bg-clip-text font-mono italic underline mb-2">
             💕Your Love Message!
           </label>
-          <br />
+
           <div
             name="loveMessage"
-            className="loveMessage w-full max-h-[480px] p-4 text-lg text-pink-700 bg-white/90 
-             border border-pink-300 rounded-2xl shadow-sm 
-             focus:ring-2 focus:ring-pink-400 outline-none 
-             transition-all duration-300 overflow-auto"
+            className="loveMessage w-full min-h-[200px] max-h-[60vh] p-4 text-lg text-pink-700 bg-white/90 
+      border border-pink-300 rounded-2xl shadow-sm 
+      focus:ring-2 focus:ring-pink-400 outline-none 
+      transition-all duration-300 overflow-auto flex-1"
           >
             {data.message}
           </div>
