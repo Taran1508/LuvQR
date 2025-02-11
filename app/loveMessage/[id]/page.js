@@ -53,8 +53,8 @@ export default async function LoveMessagePage({ params }) {
           <br />
           <div
             name="loveMessage"
-            className="loveMessage w-full min-h-[160px] max-h-[480px] p-4 text-lg text-pink-700 
-             bg-white/90 border border-pink-300 rounded-2xl shadow-sm 
+            className="loveMessage w-full max-h-[480px] p-4 text-lg text-pink-700 bg-white/90 
+             border border-pink-300 rounded-2xl shadow-sm 
              focus:ring-2 focus:ring-pink-400 outline-none 
              transition-all duration-300 resize-none overflow-auto"
           >
