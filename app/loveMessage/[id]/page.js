@@ -139,6 +139,83 @@ export default async function LoveMessagePage({ params }) {
           📩 Contact us – We’d love to hear from you!
         </p>
       </div>
+      <div className="flex flex-col items-center justify-center mb-8 p-6">
+        <div className="bg-pink-100 shadow-lg rounded-2xl p-8 max-w-2xl text-center">
+          <h1 className="text-3xl font-bold text-gray-800">
+            About the Developer
+          </h1>
+          <p className="text-gray-600 text-lg mt-4">
+            <b>Taran Mesala</b> - Full-Stack Developer & Creator of LuvQR
+          </p>
+
+          <p className="text-gray-700 mt-4 leading-relaxed">
+            Hi, I&#39;m Taran Mesala, a passionate full-stack developer and the
+            creator of <b>LoveQR</b>. With expertise in{' '}
+            <b>MERN stack, Firebase, Next.js, and Angular</b>, I build
+            interactive, scalable, and user-friendly applications. LoveQR is a
+            blend of technology and emotions— designed to help users share
+            heartfelt messages through uniquely and beautifully crafted QR
+            codes.
+          </p>
+
+          <p className="text-gray-700 mt-4 leading-relaxed">
+            My focus is on developing high-quality, production-ready
+            applications while ensuring smooth user experiences and efficient
+            backend performance. If you&#39;d like to connect, collaborate, or
+            explore more of my work, feel free to reach out!
+          </p>
+
+          <div className="mt-6 flex justify-center gap-4">
+            <a
+              href="https://www.snapchat.com/add/roxtar_john?share_id=-QaqTWw5a0w&locale=en-US" // Replace with your Snapchat link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-pink-500 hover:text-pink-600 text-lg transition duration-300"
+            >
+              Snapchat
+            </a>
+
+            <a
+              href="https://www.instagram.com/__im.john.__" // Replace with your Instagram link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-purple-500 hover:text-purple-600 text-lg transition duration-300"
+            >
+              Instagram
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/taran-mesala" // Replace with your LinkedIn link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 hover:text-blue-700 text-lg transition duration-300"
+            >
+              LinkedIn
+            </a>
+            <a
+              href="https://github.com/Taran1508" // Replace with your GitHub profile link
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-900 hover:text-gray-700 text-lg transition duration-300"
+            >
+              GitHub
+            </a>
+
+            <a
+              href="mailto:meesalataran@gmail.com" // Replace with your email
+              className="text-blue-500 hover:text-blue-600 text-lg transition duration-300"
+            >
+              Email
+            </a>
+          </div>
+        </div>
+      </div>
+      <footer className="w-full text-center py-4 text-sm bg-pink-100 bottom-0 left-0">
+        <p>
+          © {new Date().getFullYear()} LuvQR. A project by{' '}
+          <strong>TheousDevWorks</strong>. All Rights Reserved.
+        </p>
+      </footer>
     </>
   );
 }
