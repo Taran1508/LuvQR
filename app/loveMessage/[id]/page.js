@@ -56,7 +56,7 @@ export default async function LoveMessagePage({ params }) {
             className="loveMessage w-full max-h-[480px] p-4 text-lg text-pink-700 bg-white/90 
              border border-pink-300 rounded-2xl shadow-sm 
              focus:ring-2 focus:ring-pink-400 outline-none 
-             transition-all duration-300 resize-none overflow-auto"
+             transition-all duration-300 overflow-auto"
           >
             {data.message}
           </div>
