@@ -6,7 +6,7 @@ async function getMessage(id) {
 
   try {
     const res = await fetch(
-      `http://tdw-luv-qr.vercel.app/api/loveMessage/${id}`,
+      `https://tdw-luv-qr.vercel.app/api/loveMessage/${id}`,
       {
         cache: 'no-store', // Ensures fresh data
       }

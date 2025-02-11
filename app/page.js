@@ -37,7 +37,7 @@ export default function Home() {
     };
     try {
       const response = await fetch(
-        'http://tdw-luv-qr.vercel.app/api/generate-qr',
+        'https://tdw-luv-qr.vercel.app/api/generate-qr',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -60,7 +60,7 @@ export default function Home() {
 
         qrRoot.current.render(
           <QRCodeCanvas
-            value={`http://tdw-luv-qr.vercel.app/loveMessage/${encodeURIComponent(
+            value={`https://tdw-luv-qr.vercel.app/loveMessage/${encodeURIComponent(
               res.data
             )}`}
             size={200}
