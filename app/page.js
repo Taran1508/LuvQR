@@ -117,6 +117,7 @@ export default function Home() {
             placeholder="Start expressing your love here..."
             rows="7" /* Increase rows for more height */
             className="w-full h-40 p-4 text-lg text-pink-700 bg-white/90 border border-pink-300 rounded-2xl shadow-sm focus:ring-2 focus:ring-pink-400 outline-none transition-all duration-300 resize-none"
+            required
           ></textarea>
           <button
             type="submit"
