@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# LuvQR
 
-## Getting Started
+LuvQR is a QR code generator and scanner designed to make sharing links, text, and other information seamless and efficient. Built with modern web technologies, LuvQR provides a fast and easy way to generate and scan QR codes with an intuitive user experience.
 
-First, run the development server:
+## Features
+- **Generate QR Codes:** Convert text, URLs, or any input into a QR code instantly.
+- **Scan QR Codes:** Use your device's camera to scan and decode QR codes.
+- **Download & Share:** Save generated QR codes as images and share them effortlessly.
+- **History Management:** Keep track of generated and scanned QR codes.
+- **Mobile-Friendly:** Optimized for both desktop and mobile users.
+
+## Tech Stack
+- **Frontend:** React.js (Next.js for SSR)
+- **Backend:** Node.js
+- **Database:** MongoDB (for saving QR history)
+- **Styling:** Tailwind CSS
+- **Deployment:** Vercel
+
+## Installation
+
+### Prerequisites
+Make sure you have the following installed:
+- Node.js & npm
+- MongoDB (if using database storage)
+
+### Steps
+### Clone the repository:
+   ```sh
+   git clone https://github.com/yourusername/luvqr.git
+   cd luvqr
+ ```
+### Setup Application
+
+```bash
+npm install
+```
+
+### Run Full Stack Application
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Environment Variables
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Create a .env file in the backend directory and set up the following variables:
+```bash
+PORT=3000
+MONGO_URI=your_mongodb_connection_string
+BASE_URL=http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Usage
 
-## Learn More
+1. Enter a URL or text in the input field to generate a QR code.
+2. Click the "Generate QR" button.
+3. Scan QR codes using the scanner feature.
+4. Save or share the generated QR code.
 
-To learn more about Next.js, take a look at the following resources:
+## API Endpoints
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Method | Endpoint             | Description                          |
+|--------|----------------------|--------------------------------------|
+| POST   | `/generate-qr`       | Generate QrCode                      |
+| GET    | `/:id`               | Display encrypted message         |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
